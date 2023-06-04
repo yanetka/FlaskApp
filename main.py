@@ -23,15 +23,19 @@ def add_entry():
     if request.method == 'POST':
         title = request.form.get('title')
         content = request.form.get('content')
-        conn = get_db()
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO entries (title, content) VALUES (%s, %s)", (title, content))
-        conn.commit()
 
-        flash('Запис успішно додано!')
-        return redirect(url_for('browse'))
-    else:
-        return render_template('add.html')
+        if not title or not content:
+            flash('Будь ласка, заповніть усі поля.', 'error')
+        else:
+            conn = get_db()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO entries (title, content) VALUES (%s, %s)", (title, content))
+            conn.commit()
+
+            flash('Запис успішно додано!', 'success')
+            return redirect(url_for('browse'))
+
+    return render_template('add.html')
 @app.route("/browse", methods=['get', 'post'])
 def browse():
     conn = get_db()
