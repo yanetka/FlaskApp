@@ -1,26 +1,55 @@
+<!-- browse.html -->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Перегляд записів</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .flash-message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .flash-error {
+        background-color: #ffcccc;
+        color: #cc0000;
+      }
+
+      .flash-success {
+        background-color: #ccffcc;
+        color: #006600;
+      }
+
       table {
-        border-collapse: collapse;
         width: 100%;
+        border-collapse: collapse;
       }
-      
+
       th, td {
-        text-align: left;
         padding: 8px;
+        text-align: left;
         border-bottom: 1px solid #ddd;
-      }
-      
-      th {
-        background-color: #f2f2f2;
       }
     </style>
   </head>
   <body>
-    <h1>Перегляд записів</h1>
+    <h2>Записи</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          {% if message[1] == 'error' %}
+            <div class="flash-message flash-error">{{ message[0] }}</div>
+          {% elif message[1] == 'success' %}
+            <div class="flash-message flash-success">{{ message[0] }}</div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
     <table>
       <tr>
         <th>ID</th>
@@ -28,13 +57,13 @@
         <th>Заголовок</th>
         <th>Вміст</th>
       </tr>
-      {% for row in entries %}
-      <tr>
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
-        <td>{{ row[2] }}</td>
-        <td>{{ row[3] }}</td>
-      </tr>
+      {% for entry in entries %}
+        <tr>
+          <td>{{ entry[0] }}</td>
+          <td>{{ entry[1] }}</td>
+          <td>{{ entry[2] }}</td>
+          <td>{{ entry[3] }}</td>
+        </tr>
       {% endfor %}
     </table>
   </body>
