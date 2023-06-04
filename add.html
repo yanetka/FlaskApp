@@ -3,16 +3,20 @@
   <head>
     <title>Додати запис</title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
       .form-container {
         max-width: 400px;
         margin: 0 auto;
         padding: 20px;
-        border: 1px solid #ccc;
+        background-color: #f0f0f0;
+        border-radius: 5px;
       }
 
       .form-container h2 {
         text-align: center;
-        margin-bottom: 20px;
       }
 
       .form-container label {
@@ -23,39 +27,35 @@
       .form-container input[type="text"],
       .form-container textarea {
         width: 100%;
-        padding: 10px;
+        padding: 8px;
+        border-radius: 3px;
         border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
       }
 
-      .form-container input[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px 20px;
+      .form-container .btn-submit {
+        width: 100%;
+        padding: 8px;
+        background-color: #4caf50;
+        color: #fff;
         border: none;
-        border-radius: 4px;
+        border-radius: 3px;
         cursor: pointer;
-        float: right;
-      }
-
-      .form-container input[type="submit"]:hover {
-        background-color: #45a049;
       }
     </style>
   </head>
   <body>
     <div class="form-container">
       <h2>Додати запис</h2>
-      <form method="post" action="/add">
+      <form method="POST">
         <label for="title">Заголовок:</label>
-        <input type="text" id="title" name="title" required><br><br>
-        
+        <input type="text" name="title" id="title" required>
+
         <label for="content">Вміст:</label>
-        <textarea id="content" name="content" rows="4" required></textarea><br><br>
-        
-        <input type="submit" value="Додати запис">
+        <textarea name="content" id="content" required></textarea>
+
+        <button type="submit" class="btn-submit">Додати</button>
       </form>
     </div>
   </body>
 </html>
+
